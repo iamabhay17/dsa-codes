@@ -1,4 +1,4 @@
-// search elemennt
+// Insertion in sorted linked list
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -38,24 +38,28 @@ void display(Node *&head)
     cout << endl;
 }
 
-//----------------------search----------------------------
+//----------------------insertion at sorted Linked list----------------------------
 
-void search(Node *&head, int data)
+void sortedInsert(Node *&head, int data)
 {
     Node *temp = head;
-    int count = 0;
+    Node *insNode = new Node(data);
+    Node *prev = NULL;
 
-    while (temp != NULL)
+    // logic for first node
+    if (temp == NULL || temp->data >= data)
     {
-        if (temp->data == data)
-        {
-            cout << "Element is present at : " << count;
-            return;
-        }
-        temp = temp->next;
-        count++;
+        insNode->next = temp;
+        head = insNode;
+        return;
     }
-    cout << data << "not present in array";
+    // logic for middle
+    while (temp->next != NULL && temp->next->data < data)
+    {
+        temp = temp->next;
+    }
+    insNode->next = temp->next;
+    temp->next = insNode;
 }
 
 //-----------------------main-fn-----------------------------------------
@@ -70,13 +74,16 @@ int main()
     push(tail, 7);
     push(tail, 8);
     push(tail, 9);
-    push(tail, 10);
     push(tail, 11);
+    push(tail, 12);
     display(head);
 
-    // search linked list
+    // reverse linked list
 
-    search(head, 77);
+    sortedInsert(head, 10);
+    display(head);
+    sortedInsert(head, 2);
+    display(head);
 
     return 0;
 }
