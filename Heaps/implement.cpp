@@ -33,44 +33,7 @@ public:
         }
     }
 
-    // delete
-
-    void deleteFrom()
-    {
-        if (size == 0)
-        {
-            cout << "cannot delete : " << endl;
-            return;
-        }
-
-        arr[1] = arr[size];
-        size--;
-
-        int i = 1;
-        while (i < size)
-        {
-            int leftInd = 2 * i;
-            int rightInd = 2 * i + 1;
-
-            if (leftInd < size && arr[leftInd] > arr[i])
-            {
-                swap(arr[i], arr[leftInd]);
-                i = leftInd;
-            }
-            else if (rightInd < size && arr[rightInd] > arr[i])
-            {
-                swap(arr[i], arr[rightInd]);
-                i = rightInd;
-            }
-            else
-            {
-                return;
-            }
-        }
-    }
-
     // print
-
     void print()
     {
         for (int i = 1; i < size + 1; i++)
@@ -102,6 +65,42 @@ void heapify(vector<int> &arr, int i, int n)
     }
 }
 
+// delete
+
+void deleteFrom()
+{
+    if (size == 0)
+    {
+        cout << "cannot delete : " << endl;
+        return;
+    }
+
+    arr[1] = arr[size];
+    size--;
+
+    int i = 1;
+    while (i < size)
+    {
+        int leftInd = 2 * i;
+        int rightInd = 2 * i + 1;
+
+        if (leftInd < size && arr[leftInd] > arr[i])
+        {
+            swap(arr[i], arr[leftInd]);
+            i = leftInd;
+        }
+        else if (rightInd < size && arr[rightInd] > arr[i])
+        {
+            swap(arr[i], arr[rightInd]);
+            i = rightInd;
+        }
+        else
+        {
+            return;
+        }
+    }
+}
+
 // int main
 
 int main()
@@ -113,7 +112,7 @@ int main()
 
     for (int i = n / 2; i > 0; i--)
     {
-        heapify(arr, n, i);
+        heapify(arr, i, n);
     }
 
     for (auto i : arr)
